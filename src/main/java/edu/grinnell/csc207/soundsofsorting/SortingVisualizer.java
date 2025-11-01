@@ -4,6 +4,10 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
+import edu.grinnell.csc207.soundsofsorting.audio.NoteIndices;
+import edu.grinnell.csc207.soundsofsorting.rendering.ArrayPanel;
+import edu.grinnell.csc207.soundsofsorting.rendering.ControlPanel;
+
 /**
  * The SortingVisualizer driver.
  */
