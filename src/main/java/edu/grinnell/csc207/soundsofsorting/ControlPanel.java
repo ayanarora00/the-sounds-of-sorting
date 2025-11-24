@@ -2,6 +2,7 @@ package edu.grinnell.csc207.soundsofsorting;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -135,11 +136,10 @@ public class ControlPanel extends JPanel {
                 }
                 isSorting = true;
                 
-                // TODO: fill me in!
-                // 1. Create the sorting events list
-                // 2. Add in the compare events to the end of the list
-                List<SortEvent<Integer>> events = new java.util.LinkedList<>();
                 
+                // Creating list of events
+                List<SortEvent<Integer>> events = generateEvents("Merge", notes.getNotes());
+
                 // NOTE: The Timer class repetitively invokes a method at a
                 //       fixed interval.  Here we are specifying that method
                 //       by creating an _anonymous subclass_ of the TimeTask
@@ -153,12 +153,30 @@ public class ControlPanel extends JPanel {
                     public void run() {
                         if (index < events.size()) {
                             SortEvent<Integer> e = events.get(index++);
-                            // TODO: fill me in!
-                            // 1. Apply the next sort event.
-                            // 3. Play the corresponding notes denoted by the
-                            //    affected indices logged in the event.
-                            // 4. Highlight those affected indices.
+
+                            // Clearing all the highlighted notes
+                            notes.clearAllHighlighted();
+                            // Applying the event to the notes array
+                            e.apply(notes.getNotes());
+                            
+                            
+                            // Playing and highlighting the corresponding notes denoted by the
+                            // affected indices logged in the event.
+                            List <Integer> affectedindices = e.getAffectedIndices();
+
+                            for (int i = 0; i < affectedindices.size(); i++){
+                                notes.highlightNote(affectedindices.get(i));
+                            }
+
+                            // The note is played if the affected indices are also emphasized.
+                            // This accounts for events like compare which highlight the notes
+                            // but do not need the notes to be played.
+                            for (int i = 0; i < affectedindices.size(); i++){
+                                scale.playNote(affectedindices.get(i), e.isEmphasized());
+                            }
+                            
                             panel.repaint();
+
                         } else {
                             this.cancel();
                             panel.repaint();
@@ -170,6 +188,7 @@ public class ControlPanel extends JPanel {
             }
 
         });
+
         add(playButton);
     }
 }

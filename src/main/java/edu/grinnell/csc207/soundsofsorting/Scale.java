@@ -6,7 +6,7 @@ import javax.sound.midi.Synthesizer;
 
 /**
  * A musical scale.
- */
+ */     
 public class Scale {
     /** The (MIDI) note values of this scale. */
     private int[] notes;
