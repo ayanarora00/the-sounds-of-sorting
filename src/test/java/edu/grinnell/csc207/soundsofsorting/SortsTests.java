@@ -36,10 +36,28 @@ public class SortsTests {
         };
     }
 
+    public static Integer[] makeReverseArray() {
+        return new Integer[] {
+            10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+        };
+    }
+
+    public static Integer[] makeSmallArray() {
+        return new Integer[] {
+            3,1
+        };
+    }
+
     public void testSort(Consumer<Integer[]> func) {
         Integer[] arr = makeTestArray();
+        Integer[] arr2 = makeSmallArray();
+        Integer[] arr3 = makeReverseArray();
         func.accept(arr);
+        func.accept(arr2);
+        func.accept(arr3);
         assertTrue(sorted(arr));
+        assertTrue(sorted(arr2));
+        assertTrue(sorted(arr3));
     }
 
 
@@ -66,6 +84,11 @@ public class SortsTests {
     @Test
     public void testQuickSort() {
         testSort(Sorts::quickSort);
+    }
+
+    @Test
+    public void testGnomeSort() {
+        testSort(Sorts::gnomeSort);
     }
 
     // New tests added to check event sort with each sorting algorithm.
@@ -121,6 +144,16 @@ public class SortsTests {
         Integer[] copy = makeTestArray();
 
         List<SortEvent<Integer>> events = Sorts.quickSort(copy);
+        Sorts.eventSort(arr, events);
+        assertTrue(sorted(arr));
+    }
+
+    @Test
+    public void testEventSortWithGnome(){
+        Integer[] arr = makeTestArray();
+        Integer[] copy = makeTestArray();
+
+        List<SortEvent<Integer>> events = Sorts.gnomeSort(copy);
         Sorts.eventSort(arr, events);
         assertTrue(sorted(arr));
     }

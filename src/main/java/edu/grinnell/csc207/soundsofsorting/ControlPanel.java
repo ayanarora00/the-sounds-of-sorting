@@ -138,7 +138,7 @@ public class ControlPanel extends JPanel {
                 
                 
                 // Creating list of events
-                List<SortEvent<Integer>> events = generateEvents("Merge", notes.getNotes());
+                List<SortEvent<Integer>> events = generateEvents((String)sorts.getSelectedItem(), notes.getNotes());
 
                 // NOTE: The Timer class repetitively invokes a method at a
                 //       fixed interval.  Here we are specifying that method

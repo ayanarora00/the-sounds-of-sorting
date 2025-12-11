@@ -18,5 +18,11 @@ Author: Ayan Arora (Starter code provided by Prof. Osera)
 *   VS Code IDE
 *   Wikipedia page for Fischer Yates Shuffle Algorithm (code taken from project 3 - wiki page was
     referenced then)
+*   Wikipedia page on gnomeSort for the personal sorting algorithm I had to implement: https://en.wikipedia.org/wiki/Gnome_sort
 
+## Change log
+
+*   The bug in ControlPanel due to the sorts being hardcoded fixed.
+*   A sort algorithm of my own choice and its appropriate tests added
+*   Test suite expanded to match the criteria in the prompt (3 different tests now included per basic sort)
 
